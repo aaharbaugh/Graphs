@@ -11,38 +11,104 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex] = set()
+
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        if v1 in self.vertices and v2 in self.vertices: 
+            self.vertices[v1].add(v2)
+        else: 
+            raise IndexError("The One or More of the Vertices You Have Provided Are Not Valid. ")
+
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+
+        qq = Queue()
+        visited = set()
+
+        qq.enqueue(starting_vertex)
+
+        while qq.size() > 0:
+
+            #pop one out. 
+            vertex = qq.dequeue()
+            #if not visited. Mark as visited. 
+            if vertex not in visited:
+            #Get adjacent. Add to list. 
+                visited.add(vertex)
+                print(vertex)
+                for ea in self.vertices[vertex]:
+                    qq.enqueue(ea)
+            #enqueue a newone. 
+
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        stack = Stack()
+        visited = set()
+
+        stack.push(starting_vertex)
+
+        while stack.size() > 0:
+
+            #pop one out. 
+            vertex = stack.pop()
+            #if not visited. Mark as visited. 
+            if vertex not in visited:
+            #Get adjacent. Add to list. 
+                visited.add(vertex)
+                print(vertex)
+                for ea in self.vertices[vertex]:
+                    stack.push(ea)
+            #enqueue a newone. 
+
     def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
-        pass  # TODO
+        visited = set()
+        def recursiveFunction(self, current_vert, visited):
+            if current_vert not in visited:
+                visited.add(current_vert)
+                print(current_vert)
+
+                for next_vert in self.vertices[current_vert]:
+                    recursiveFunction(self, next_vert, visited)
+        
+
+        recursiveFunction(self, starting_vertex, visited)
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        # qq = Queue()
+        # visited = set()
+
+        # qq.enqueue(starting_vertex)
+
+        # while qq.size() > 0:
+
+        #     #pop one out. 
+        #     vertex = qq.dequeue()
+        #     #if not visited. Mark as visited. 
+        #     if vertex not in visited:
+        #     #Get adjacent. Add to list. 
+        #         visited.add(vertex)
+        #         print(vertex)
+        #         for ea in self.vertices[vertex]:
+        #             qq.enqueue(ea)
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
@@ -82,6 +148,8 @@ if __name__ == '__main__':
     '''
     print(graph.vertices)
 
+
+
     '''
     Valid DFT paths:
         1, 2, 3, 5, 4, 6, 7
@@ -108,6 +176,7 @@ if __name__ == '__main__':
     '''
     graph.bft(1)
 
+    print('test')
     '''
     Valid DFT recursive paths:
         1, 2, 3, 5, 4, 6, 7
@@ -116,7 +185,7 @@ if __name__ == '__main__':
         1, 2, 4, 6, 3, 5, 7
     '''
     graph.dft_recursive(1)
-
+    print('end test')
     '''
     Valid BFS path:
         [1, 2, 4, 6]
